@@ -6,21 +6,21 @@
 #define kiriBawah 32
 #define kananAtas 2
 #define kananBawah 4
-#define x 35
-#define y 34
+#define x 34
+#define y 35
 int xValue = 0;
 int yValue = 0;
 
 void setup() {
   // put your setup code here, to run once:
-  // pinMode(atas,OUTPUT);
-  // pinMode(bawah,OUTPUT);
-  // pinMode(kiri,OUTPUT);
-  // pinMode(kanan,OUTPUT);
-  // pinMode(kiriBawah,OUTPUT);
-  // pinMode(kananBawah,OUTPUT);
-  // pinMode(kiriAtas,OUTPUT);
-  // pinMode(kananAtas,OUTPUT);
+  pinMode(atas,OUTPUT);
+  pinMode(bawah,OUTPUT);
+  pinMode(kiri,OUTPUT);
+  pinMode(kanan,OUTPUT);
+  pinMode(kiriBawah,OUTPUT);
+  pinMode(kananBawah,OUTPUT);
+  pinMode(kiriAtas,OUTPUT);
+  pinMode(kananAtas,OUTPUT);
   Serial.begin(9600);
   pinMode(x,OUTPUT);
   pinMode(y,OUTPUT);
@@ -36,11 +36,95 @@ void loop() {
   // digitalWrite(kiriBawah,HIGH);
   // digitalWrite(kananAtas,HIGH);
   // digitalWrite(kananBawah,HIGH);
-  xValue = analogRead(x);
-  yValue = analogRead(y);
-  Serial.print(map(xValue, 0,1023, 0, 7));
+
+  xValue = map(analogRead(x), 0,1023, 0, 255);
+  yValue = map(analogRead(y), 0,1023, 0, 255);
+  Serial.print(xValue);
   Serial.print(", ");
-  Serial.print(map(yValue, 0,1023, 7, 0));
+  Serial.print(yValue);
   Serial.println("");
-  
+
+    
+  if(xValue == 0 &&  yValue ==0){
+    digitalWrite(kiri,LOW);
+    digitalWrite(kanan,LOW);
+    digitalWrite(atas,LOW);
+    digitalWrite(bawah,LOW);
+    digitalWrite(kiriAtas,LOW);
+    digitalWrite(kiriBawah,LOW);
+    digitalWrite(kananAtas,LOW);
+    digitalWrite(kananBawah,HIGH);
+  }else if(xValue == 0 && (yValue >= 760 && yValue < 770)){
+    digitalWrite(kiri,LOW);
+    digitalWrite(kanan,HIGH);
+    digitalWrite(atas,LOW);
+    digitalWrite(bawah,LOW);
+    digitalWrite(kiriAtas,LOW);
+    digitalWrite(kiriBawah,LOW);
+    digitalWrite(kananAtas,LOW);
+    digitalWrite(kananBawah,LOW);
+  }else if(xValue == 0 && yValue == 1020){
+    digitalWrite(kiri,LOW);
+    digitalWrite(kanan,LOW);
+    digitalWrite(atas,LOW);
+    digitalWrite(bawah,LOW);
+    digitalWrite(kiriAtas,LOW);
+    digitalWrite(kiriBawah,LOW);
+    digitalWrite(kananAtas,HIGH);
+    digitalWrite(kananBawah,LOW);    
+  }else if(xValue == 1020 && yValue == 1020){
+    digitalWrite(kiri,LOW);
+    digitalWrite(kanan,LOW);
+    digitalWrite(atas,LOW);
+    digitalWrite(bawah,LOW);
+    digitalWrite(kiriAtas,HIGH);
+    digitalWrite(kiriBawah,LOW);
+    digitalWrite(kananAtas,LOW);
+    digitalWrite(kananBawah,LOW);  
+  }else if(xValue == 1020 && yValue ==0){
+    digitalWrite(kiri,LOW);
+    digitalWrite(kanan,LOW);
+    digitalWrite(atas,LOW);
+    digitalWrite(bawah,LOW);
+    digitalWrite(kiriAtas,LOW);
+    digitalWrite(kiriBawah,HIGH);
+    digitalWrite(kananAtas,LOW);
+    digitalWrite(kananBawah,LOW);
+  }else if((xValue >= 720 && xValue < 730) && yValue == 0){
+    digitalWrite(kiri,LOW);
+    digitalWrite(kanan,LOW);
+    digitalWrite(atas,LOW);
+    digitalWrite(bawah,HIGH);
+    digitalWrite(kiriAtas,LOW);
+    digitalWrite(kiriBawah,LOW);
+    digitalWrite(kananAtas,LOW);
+    digitalWrite(kananBawah,LOW);
+  }else if((xValue >= 715 && xValue < 730) && (yValue >= 760 && yValue < 770)){
+    digitalWrite(kiri,LOW);
+    digitalWrite(kanan,LOW);
+    digitalWrite(atas,LOW);
+    digitalWrite(bawah,LOW);
+    digitalWrite(kiriAtas,LOW);
+    digitalWrite(kiriBawah,LOW);
+    digitalWrite(kananAtas,LOW);
+    digitalWrite(kananBawah,LOW);    
+  }else if((xValue >= 715 && xValue < 730)  && yValue == 1020){
+    digitalWrite(kiri,LOW);
+    digitalWrite(kanan,LOW);
+    digitalWrite(atas,HIGH);
+    digitalWrite(bawah,LOW);
+    digitalWrite(kiriAtas,LOW);
+    digitalWrite(kiriBawah,LOW);
+    digitalWrite(kananAtas,LOW);
+    digitalWrite(kananBawah,LOW);
+  }else if(xValue == 1020 && (yValue >= 760 && yValue < 770)){
+    digitalWrite(kiri,HIGH);
+    digitalWrite(kanan,LOW);
+    digitalWrite(atas,LOW);
+    digitalWrite(bawah,LOW);
+    digitalWrite(kiriAtas,LOW);
+    digitalWrite(kiriBawah,LOW);
+    digitalWrite(kananAtas,LOW);
+    digitalWrite(kananBawah,LOW);
+  }
 }
