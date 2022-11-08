@@ -10,7 +10,7 @@
 #define y 35
 int xValue = 0;
 int yValue = 0;
-
+ 
 void setup() {
   // put your setup code here, to run once:
   pinMode(atas,OUTPUT);
@@ -25,7 +25,7 @@ void setup() {
   pinMode(x,OUTPUT);
   pinMode(y,OUTPUT);
 }
-
+ 
 void loop() {
   // put your main code here, to run repeatedly:
   // digitalWrite(kiri,HIGH);
@@ -36,15 +36,15 @@ void loop() {
   // digitalWrite(kiriBawah,HIGH);
   // digitalWrite(kananAtas,HIGH);
   // digitalWrite(kananBawah,HIGH);
-
+ 
   xValue = map(analogRead(x), 0,1023, 0, 255);
   yValue = map(analogRead(y), 0,1023, 0, 255);
   Serial.print(xValue);
   Serial.print(", ");
   Serial.print(yValue);
   Serial.println("");
-
-    
+ 
+ 
   if(xValue == 0 &&  yValue ==0){
     digitalWrite(kiri,LOW);
     digitalWrite(kanan,LOW);
@@ -92,8 +92,7 @@ void loop() {
     digitalWrite(kananBawah,LOW);
   }else if((xValue >= 720 && xValue < 730) && yValue == 0){
     digitalWrite(kiri,LOW);
-    digitalWrite(kanan,LOW);
-    digitalWrite(atas,LOW);
+    digitalWrite(kanan,LOW);    digitalWrite(atas,LOW);
     digitalWrite(bawah,HIGH);
     digitalWrite(kiriAtas,LOW);
     digitalWrite(kiriBawah,LOW);
