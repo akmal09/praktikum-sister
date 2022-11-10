@@ -1,11 +1,11 @@
-// const int capteur_D = 33;
+const int capteur_D = 33;
 const int capteur_A = 2;
 
 int val_analogique;
 
 void setup()
 {
-// pinMode(capteur_D, INPUT);
+pinMode(capteur_D, INPUT);
 pinMode(capteur_A, INPUT);
  Serial.begin(9600);
  }

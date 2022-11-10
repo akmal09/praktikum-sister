@@ -1,10 +1,13 @@
 const int capteur_A_humid = 2;
 const int capteur_D_hujan = 25;
+#define capteur_A_hujan  25
 int readHumid;
-int readHujan;
+int readHujanDigital;
 #define lembab 33
 #define tidakLembab 32
 #include <Servo.h>
+#include <LiquidCrystal_I2C.h>
+LiquidCrystal_I2C lcd(0x27, 16, 2); // I2C address 0x27, 16 column and 2 rows
 
 Servo myservo;
 bool servoUdahGerakHl = false;
@@ -16,17 +19,24 @@ void setup() {
   // put your setup code here, to run once:
   pinMode(capteur_A_humid, INPUT);
   pinMode(capteur_D_hujan, INPUT);
+  pinMode(capteur_A_hujan, INPUT);
   pinMode(lembab, OUTPUT);
   pinMode(tidakLembab, OUTPUT);
   myservo.attach(13);
   Serial.begin(9600);
+  lcd.init();
+  lcd.backlight();
+  // lcd.setCursor(0, 0);
+  // lcd.print("Arduino");
+  // lcd.setCursor(2, 1);
+  // lcd.print("HalloWorld");
 }
 
 void loop() {
   // ATAP TERBUKA DERAJAT 0, TERTUTUP DERAJAT NYA 90
   // put your main code here, to run repeatedly:
   readHumid=analogRead(capteur_A_humid);
-  readHujan=digitalRead(capteur_D_hujan);
+  readHujanDigital=digitalRead(capteur_D_hujan);
   
   if(readHumid < 500){
     digitalWrite(lembab, HIGH);
@@ -36,10 +46,9 @@ void loop() {
     digitalWrite(tidakLembab, HIGH);    
   }
 
-  if(readHujan == HIGH && (readHumid < 500)){
+  if(readHujanDigital == HIGH && (readHumid < 500)){
     // Hujan tidak turun tanah lembab
     if(servoUdahGerakThL == false){
-      Serial.println("gerak 90");                        
        myservo.write(90);
        servoUdahGerakThL = true;
        servoUdahGerakHl = false;       
@@ -47,7 +56,7 @@ void loop() {
        servoUdahGerakHTl = false;    
     }
        delay(15);
-  }else if(readHujan == HIGH && (readHumid >= 500)){
+  }else if(readHujanDigital == HIGH && (readHumid >= 500)){
         // Hujan tidak turun tanah kering
         if(servoUdahGerakThTl == false){
           servoUdahGerakThTl = true;
@@ -55,7 +64,7 @@ void loop() {
           servoUdahGerakHl = false;  
           servoUdahGerakHTl = false;     
         }
-  }else if(readHujan == LOW && (readHumid >= 500)){
+  }else if(readHujanDigital == LOW && (readHumid >= 500)){
         // Hujan turun tanah kering
         if(servoUdahGerakHTl == false){
           myservo.write(0);
@@ -65,7 +74,7 @@ void loop() {
           servoUdahGerakHl = false;
         }
   }
-  else if(readHujan == LOW && (readHumid < 500)){
+  else if(readHujanDigital == LOW && (readHumid < 500)){
       // hujan turun tanah lembab
       if(servoUdahGerakHl == false){
         myservo.write(90);
@@ -75,4 +84,11 @@ void loop() {
         servoUdahGerakThL = false;
       }
   }
+  lcd.setCursor(0, 0);
+  lcd.print("in-hujan : ");
+  lcd.print(analogRead(capteur_A_hujan)); 
+  lcd.setCursor(0, 1); 
+  lcd.print("ikl-tanah : ");
+  lcd.print(readHumid);
+  delay(1000);
 }
