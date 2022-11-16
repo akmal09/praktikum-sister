@@ -54,8 +54,8 @@ void handleNewMessages(int numNewMessages) {
       welcome += "/open_servo to turn GPIO OFF \n";
       welcome += "/status to request current GPIO state \n";
       welcome += "/option to return the reply keyboard \n";
-      welcome += "/help to make system automate to close or open the servo based on ldr sensor\n";
-      welcome += "/unhelp to make system un-automate the servo \n";
+      welcome += "/subscribe to automate send condition via telegram bot \n";
+      welcome += "/unsubscribe to unautomate send condition via telegram bot\n";
       bot.sendMessage(chat_id, welcome, "");     
     }
   
@@ -86,7 +86,7 @@ void handleNewMessages(int numNewMessages) {
     }
   
     if (text == "/option") {
-      String keyboardJson = "[[\"/sdsdled_on\", \"/led_off\"],[\"/state\"]]";
+      String keyboardJson = "[[\"/subscribe\", \"/unsubscribe\"],[\"/open_servo\", \"/close_servo\"], [\"/status\"]]";
       bot.sendMessageWithReplyKeyboard(chat_id, "Choose one of the following options", "", keyboardJson, true);
     }
   
