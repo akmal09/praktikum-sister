@@ -6,7 +6,7 @@
 // Provide the RTDB payload printing info and other helper functions.
 #include "addons/RTDBHelper.h"
 // Insert Authorized Email and Corresponding Password
-#define USER_EMAIL "akmaasfdl@mail.com"
+#define USER_EMAIL "akmal@mail.com"
 #define USER_PASSWORD "12345678"
 
 // #include "DHT.h"
@@ -57,25 +57,7 @@ Serial.begin(115200);
 }
  
 void loop() {
- 
-//  float hum = dht.readHumidity();
-//  float temp = dht.readTemperature(); 
- 
-//   if (isnan(hum) || isnan(temp)  ){
-//    Serial.println(F("Failed to read from DHT sensor!"));
-//    return;
-//  }
- 
-//  Serial.print("Temperature: ");
-//  Serial.print(temp);
-//  Serial.print("°C");
-//  Serial.print(" Humidity: ");
-//  Serial.print(hum);
-//  Serial.print("%");
-//  Serial.println();
-nilai = analogRead(ldr);
-Serial.println("intensitas cahaya");
-Serial.println(nilai);
+  nilai = analogRead(ldr);
 
   if(nilai  < 3000){
     if(tutup == true){
@@ -93,6 +75,24 @@ Serial.println(nilai);
   Firebase.setFloat(firebaseData, "/ESP32_APP/SERVO_CONDITION", tutup);
   //  Firebase.setFloat(firebaseData, "/ESP32_APP/timestamp", Firebase.setTimestamp(FirebaseData &fbdo, T path));
   Firebase.setTimestamp(firebaseData, "/ESP32_APP/timestamp");
-  //  Firebase.setFloat(firebaseData, "/ESP32_APP/HUMIDITY", hum);
+  
+  // cek nilai intensitas cahaya
+  if(Firebase.getFloat(firebaseData, "/ESP32_APP/LIGHT_INTENSITY")){
+    Serial.print("intensitas cahaya dari Firebase : ");
+    Serial.println(firebaseData.to<int>());
+  }
+  
+  // cek nilai kondisi servo
+  if(Firebase.getFloat(firebaseData, "/ESP32_APP/SERVO_CONDITION")){
+    Serial.print("Kondisi Servo dari Firebase : ");
+    Serial.println(firebaseData.to<int>());
+  }
+
+  // cek timestamp
+  if(Firebase.getInt(firebaseData, "/ESP32_APP/timestamp")){
+    Serial.print("Kondisi timestamp dari Firebase : ");
+    Serial.println(firebaseData.to<int>());    
+  }
+
   delay(200);
 }
