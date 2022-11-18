@@ -91,7 +91,7 @@ void loop() {
   // cek timestamp
   if(Firebase.getInt(firebaseData, "/ESP32_APP/timestamp")){
     Serial.print("Kondisi timestamp dari Firebase : ");
-    Serial.println(firebaseData.to<int>());    
+    Serial.println(firebaseData.to<int>()*-1);    
   }
 
   delay(200);
