@@ -6,8 +6,8 @@
 #define FIREBASE_HOST "https://sister-7-default-rtdb.asia-southeast1.firebasedatabase.app/"
 #define FIREBASE_Authorization_key "jHBYglxwEKknykgpSAGZH3VF9PrZdmYwx3VG1SUl"
 // Koneksi
-#define WIFI_SSID "Red-Xperia" // Change the name of your WIFI
-#define WIFI_PASSWORD "hmmmlupa" // Change the password of your WIFI
+#define WIFI_SSID "Kosan Maba" // Change the name of your WIFI
+#define WIFI_PASSWORD "12345678" // Change the password of your WIFI
  
 #define DHTPIN 14   
  

@@ -8,8 +8,8 @@
 #include <ArduinoJson.h>
 #include <Servo.h>
 // Replace with your network credentials
-const char* ssid = "ilmu kelautan";
-const char* password = "est2001bos";
+const char* ssid = "Kosan Maba";
+const char* password = "12345678";
 Servo myServo;
 #define ldr 32
 bool isServoAutomate = false;

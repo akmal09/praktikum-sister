@@ -8,8 +8,8 @@
 #include <ArduinoJson.h>
  
 // Replace with your network credentials
-const char* ssid = "Red-Xperia";
-const char* password = "hmmmlupa";
+const char* ssid = "Kosan Maba";
+const char* password = "12345678";
  
 // Initialize Telegram BOT
 #define BOTtoken "5620247510:AAFecY8ZpLf5FAEyYrn9DtGSzgVZfmxHA1I"  // your Bot Token (Get from Botfather)
